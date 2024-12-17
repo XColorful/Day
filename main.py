@@ -94,13 +94,13 @@ def manage_history(daydir, historydir, historycopy, historydelete):
             file_path = os.path.join(daydir, file_name)
 
             # 复制到历史目录
-            if historycopy > 0 and (current_date - file_date).days > historycopy:
+            if historycopy >= 0 and (current_date - file_date).days > historycopy:
                 target_path = os.path.join(historydir, file_name)
                 if not os.path.exists(target_path):
                     shutil.copy(file_path, target_path)
 
             # 删除旧文件
-            if historydelete > 0 and (current_date - file_date).days > historydelete:
+            if historydelete >= 0 and (current_date - file_date).days > historydelete:
                 os.remove(file_path)
 
         except ValueError:
