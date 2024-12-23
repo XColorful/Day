@@ -85,6 +85,8 @@ def release_lock(lock_fd):
 
 def manage_history(daydir, historydir, historycopy, historydelete):
     current_date = datetime.now()
+    if not os.path.exists(daydir):
+        os.makedirs(daydir)
     if not os.path.exists(historydir):
         os.makedirs(historydir)
 
@@ -130,6 +132,7 @@ def calculate_total_progress(tasks, total_minutes):
     return min(total_progress / total_minutes, 1.0) if total_minutes > 0 else 0
 
 def adjust_task_bar_length(tasks, max_length=200):
+    if (len(tasks) == 0): return
     max_minutes = max(task['total_minutes'] for task in tasks)
     for task in tasks:
         task['bar_length'] = max(50, int(max_length * (task['total_minutes'] / max_minutes)))
