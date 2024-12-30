@@ -88,6 +88,8 @@ def manage_history(daydir, historydir, historycopy, historydelete):
     if not os.path.exists(historydir):
         os.makedirs(historydir)
 
+    if not os.path.exists(daydir):
+        os.makedirs(daydir)
     for file_name in os.listdir(daydir):
         try:
             file_date = datetime.strptime(file_name[:10], '%Y_%m_%d')
